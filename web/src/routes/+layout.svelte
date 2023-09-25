@@ -45,5 +45,7 @@
 		</AppBar>
 	</svelte:fragment>
 	<!-- Page Route Content -->
-	<slot />
+	<div class="container flex justify-center items-center w-full">
+		<slot />
+	</div>
 </AppShell>
