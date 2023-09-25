@@ -18,15 +18,15 @@ export default {
 				preset: [
 					{
 						name: 'wintry',
-						enhancements: true,
+						// enhancements: true,
 					},
 					{
 						name: 'modern',
-						enhancements: true,
+						// enhancements: true,
 					},
 					{
 						name: 'rocket',
-						enhancements: true,
+						// enhancements: true,
 					},
 				],
 			},
