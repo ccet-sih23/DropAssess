@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserType {
+    govtOff
+    schoolAdmin 
+    teacher 
+    admin
+}
+
+model UserSession {
+    id String @id @unique @default(uuid())
+    createdAt DateTime  @default(now())
+    updatedAt DateTime @updatedAt
+    expiresAt DateTime
+    userId    String 
+    user      User     @relation(references: [id], fields: [userId])
+}
+
+model User {
+    id String @id @unique @default(uuid())
+    name String
+    email String 
+    passwordHash String
+    userType UserType @default(teacher)
+    createAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    avatar String @default("/poop.png")
+    banner String @default("https://img.guildedcdn.com/asset/Default/ProfileBannerLarge.png")
+    sessions UserSession[]
+}
