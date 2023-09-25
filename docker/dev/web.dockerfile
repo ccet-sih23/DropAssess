@@ -2,6 +2,7 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-RUN apk add --no-cache git
+COPY ../../web/package.json ./
+COPY ../../web/yarn.lock ./
 
 CMD yarn; npx prisma db push; npx prisma generate; npx prisma studio & yarn dev
