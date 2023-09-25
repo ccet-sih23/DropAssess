@@ -6,7 +6,7 @@ export interface User {
 	name: string;
 	email: string;
 	passwordHash: string;
-	userType: $Enums.UserType;
+	userType: string;
 	createAt: Date;
 	updatedAt: Date;
 	avatar: string;

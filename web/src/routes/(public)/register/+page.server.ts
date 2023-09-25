@@ -1,6 +1,12 @@
 import { db } from "$lib";
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { hashPass } from '../../../lib/server/argon';
+
+export const load = async ({locals}) => {
+  if (locals.user) {
+    throw redirect(302, '/')
+  }
+}
 
 export const actions = {
   register: async ({request}) => {

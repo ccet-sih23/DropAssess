@@ -5,4 +5,4 @@ WORKDIR /app
 COPY ../../web/package.json ./
 COPY ../../web/yarn.lock ./
 
-CMD yarn; npx prisma db push; npx prisma generate; npx prisma studio & yarn dev
+CMD yarn; npx zenstack generate && npx prisma db push; npx prisma generate; npx prisma studio & yarn dev
