@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.postcss';
-	import { AppShell, AppBar, Avatar, Drawer, getDrawerStore, initializeStores } from '@skeletonlabs/skeleton';
+	import { AppShell, AppBar, Avatar, Drawer, getDrawerStore, initializeStores, LightSwitch } from '@skeletonlabs/skeleton';
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
@@ -52,7 +52,7 @@
 		<!-- App Bar -->
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<strong class="text-xl uppercase">DROP ASSESS</strong>
+				<img src="/images/logo.jpeg" alt="Logo" />
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<!-- <a
@@ -79,6 +79,7 @@
 				>
 					GitHub
 				</a> -->
+				<LightSwitch />
 				<button on:click={() => drawerStore.open()} class="variant-ghost-surface rounded-full h-12 w-12 p-2 flex flex-col gap-1 justify-center items-center">
 				{#if $page.data.user}
 					<div class="flex gap-4">
@@ -94,7 +95,7 @@
 		</AppBar>
 	</svelte:fragment>
 	<!-- Page Route Content -->
-	<div class="container flex justify-center items-center w-full">
+	<main class="flex justify-center items-center w-full">
 		<slot />
-	</div>
+	</main>
 </AppShell>

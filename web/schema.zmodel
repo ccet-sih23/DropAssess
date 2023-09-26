@@ -8,31 +8,70 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum GovtPost {
+  state
+  capital
+}
+
+enum Board {
+  cbse
+  icse
+  state
+}
+
 enum UserType {
     govtOff
     schoolAdmin 
     teacher 
     admin
+    none
 }
 
-model UserSession {
-    id String @id @unique @default(uuid())
-    createdAt DateTime  @default(now())
-    updatedAt DateTime @updatedAt
+abstract model Base {
+  id String @id @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserSession extends Base {
     expiresAt DateTime
     userId    String 
     user      User     @relation(references: [id], fields: [userId])
 }
 
-model User {
-    id String @id @unique @default(uuid())
+model User extends Base {
     name String
     email String @unique
     passwordHash String
-    userType UserType @default(teacher)
-    createAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    userType UserType @default(none)
     avatar String @default("https://wallpapers.com/images/hd/cool-anime-girl-pfp-hu-tao-6cjtrrhyvr2g24ik.jpg")
     banner String @default("https://img.guildedcdn.com/asset/Default/ProfileBannerLarge.png")
     sessions UserSession[]
+    GovtOff GovtOff?
+}
+
+model GovtOff {
+  userId String @id @unique
+  user User @relation(fields: [userId], references: [id])
+  post GovtPost @default(state)
+  name String
+  state String
+  schools School[]
+}
+
+
+model School extends Base {
+  assignedGovtOfficialId String?
+  assignedGovtOfficial GovtOff? @relation(fields: [assignedGovtOfficialId], references: [userId])
+  name String
+  address String
+  board Board
+  students Student[]
+}
+
+model Student extends Base {
+  schoolId String?
+  school School? @relation(fields: [schoolId], references: [id])
+  name String
+  isDropped Boolean @default(false)
 }
