@@ -17,13 +17,50 @@
     {#if form?.incorrectDetails}
         <p class="error">The email or password is incorrect</p>
     {/if}
-    <input name="email" type="email" placeholder="dumbledore@hogwarts.edu" required />
-    <input name="pass" type="password" placeholder="Password" required />
+    <span>
+        <label for="email">Email: </label>
+        <input name="email" type="email" placeholder="dumbledore@hogwarts.edu" required />
+    </span>
+    <span>
+        <label for="pass">Password: </label>
+        <input name="pass" type="password" placeholder="Password" required />
+    </span>
     <button type="submit" class="btn variant-ghost-surface">
-        Login
+        Continue
     </button>
+    <a href="/register">
+        Don't have an account?
+    </a>
 </form>
 
 <style lang="postcss">
-    
+    form {
+        padding: 5vh 3vw;
+        border: 1px solid var(--slate-200);
+        width: 28%;
+        border-radius: 20px;
+        &>h1 {
+            font-weight: 800;
+            text-align: center;
+        }
+        &>span {
+            color: var(--slate-500);
+            &>input {
+                border-radius: 10px;
+                border: 1px solid var(--slate-200);
+            }
+            &>a {
+                text-decoration: underline;
+            }
+        }
+        &>button {
+            width: fit-content;
+            margin: auto;
+            background: rgba(var(--color-surface-900) / 1);
+            color: var(--white-100);
+        }
+        &>a {
+            text-align: center;
+        }
+    }
 </style>

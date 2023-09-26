@@ -55,7 +55,7 @@ export const actions = {
     if (redirectTo) {
       throw redirect(302, `/${redirectTo.slice(1)}`)
     }
-    throw redirect(302, '/');
+    throw redirect(302, '/dashboard');
 
   }
 }

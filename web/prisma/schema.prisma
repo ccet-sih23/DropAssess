@@ -29,6 +29,8 @@ enum UserType {
     schoolAdmin
     teacher
     admin
+    student
+    dropped
     none
 }
 

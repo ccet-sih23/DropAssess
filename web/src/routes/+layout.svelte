@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.postcss';
 	import { AppShell, AppBar, Avatar, Drawer, getDrawerStore, initializeStores, LightSwitch } from '@skeletonlabs/skeleton';
+	import { goto } from '$app/navigation';
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
@@ -22,6 +23,11 @@
 		<a href="/me">
 			<h3>
 				Profile
+			</h3>
+		</a>
+		<a href="/dashboard">
+			<h3>
+				Dashboard
 			</h3>
 		</a>
 		<form action="/logout" method="POST">
@@ -53,32 +59,25 @@
 		<AppBar>
 			<svelte:fragment slot="lead">
 				<img src="/images/logo.jpeg" alt="Logo" />
+
+				{#if $page.data.user}
+				<nav>
+					<button class="pill" on:click={() => goto('/dashboard')}>
+						Dashboard
+					</button>
+					<button class="pill" on:click={() => goto('/analytics')}>
+						Analytics
+					</button>
+					<button class="pill" on:click={() => goto('/schools')}>
+						Schools
+					</button>
+					<button class="pill" on:click={() => goto('/students')}>
+						Students
+					</button>
+				</nav>
+				{/if}
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<!-- <a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://discord.gg/EXqV7W8MtY"
-					target="_blank"
-					rel="noreferrer"
-				>
-					Discord
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://twitter.com/SkeletonUI"
-					target="_blank"
-					rel="noreferrer"
-				>
-					Twitter
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://github.com/skeletonlabs/skeleton"
-					target="_blank"
-					rel="noreferrer"
-				>
-					GitHub
-				</a> -->
 				<LightSwitch />
 				<button on:click={() => drawerStore.open()} class="variant-ghost-surface rounded-full h-12 w-12 p-2 flex flex-col gap-1 justify-center items-center">
 				{#if $page.data.user}
@@ -99,3 +98,18 @@
 		<slot />
 	</main>
 </AppShell>
+
+
+<style lang="postcss">
+	nav {
+		padding-left: 2vw;
+		display: flex;
+		gap: 2vw;
+		&>.pill {
+			background-color: var(--slate-100);
+			&.active {
+				background-color: var(--slate-200);
+			}
+		}
+	}
+</style>
